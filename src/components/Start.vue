@@ -7,10 +7,194 @@
 			<button v-if="ENQUETEUR" @click="next" class="btn-next">Suivant</button>
 		</div>
 
-		<div>
+		<div v-if="level === 1">
 			<button @click="startSurvey" class="btn-next">COMMENCER QUESTIONNAIRE</button>
 		</div>
-		<div>
+
+		<div id="q1" v-if="level === 2">
+			<h1> Vous êtes : </h1>
+			<select v-model="Q1" class="form-control">
+				<option v-for="option in q1" :key="option.id" :value="option.output">
+					{{ option.text }}
+				</option>
+			</select>
+			<button v-if="Q1" @click="next" class="btn-next">Suivant</button>
+			<button @click="back" class="btn-return">retour</button>
+		</div>
+
+		<div id="q2" v-if="level === 3">
+			<h1> Combien de personnes constituent votre ménage ? </h1>
+			<select v-model="Q2" class="form-control">
+				<option v-for="option in q2" :key="option.id" :value="option.output">
+					{{ option.text }}
+				</option>
+			</select>
+			<button v-if="Q2" @click="next" class="btn-next">Suivant</button>
+			<button @click="back" class="btn-return">retour</button>
+		</div>
+
+		<div id="q3" v-if="level === 4">
+			<h1> Votre ménage dispose-t-il d’une voiture ? </h1>
+			<select v-model="Q3" class="form-control">
+				<option v-for="option in q3" :key="option.id" :value="option.output">
+					{{ option.text }}
+				</option>
+			</select>
+			<button v-if="Q3" @click="next" class="btn-next">Suivant</button>
+			<button @click="back" class="btn-return">retour</button>
+		</div>
+
+		<div id="q4" v-if="level === 5 && Q3 <= 2">
+			<h1> Où garez-vous votre voiture en général dans le quartier ? </h1>
+			<select v-model="Q4" class="form-control">
+				<option v-for="option in q4" :key="option.id" :value="option.output">
+					{{ option.text }}
+				</option>
+			</select>
+			<button v-if="Q4" @click="next" class="btn-next">Suivant</button>
+			<button @click="back" class="btn-return">retour</button>
+		</div>
+
+		<div id="q5" v-if="level === 6 && Q3 <= 2">
+			<h1> Est-il facile de se garer dans le quartier ? </h1>
+			<select v-model="Q5" class="form-control">
+				<option v-for="option in q5" :key="option.id" :value="option.output">
+					{{ option.text }}
+				</option>
+			</select>
+			<button v-if="Q5" @click="next" class="btn-next">Suivant</button>
+			<button @click="back" class="btn-return">retour</button>
+		</div>
+
+		<div id="q6" v-if="level === 7 && Q3 <= 2">
+			<h1> Utilisez-vous régulièrement votre véhicule ? </h1>
+			<select v-model="Q6" class="form-control">
+				<option v-for="option in q6" :key="option.id" :value="option.output">
+					{{ option.text }}
+				</option>
+			</select>
+			<button v-if="Q6" @click="next" class="btn-next">Suivant</button>
+			<button @click="back" class="btn-return">retour</button>
+		</div>
+
+		<div id="q7" v-if="level === 8 && Q3 <= 2">
+			<h1> Pour quel(s) motif(s) utilisez-vous principalement votre voiture ?
+				(plusieurs réponses possibles)</h1>
+			<br>
+			<label for="1">Pour aller au travail</label>
+			<input type="checkbox" id="1" value="1" v-model="Q7">
+			<br>
+			<label for="2">Pour aller faire des courses</label>
+			<input type="checkbox" id="2" value="2" v-model="Q7">
+			<br>
+			<label for="3">Pour un motif de loisirs (sport, etc.)</label>
+			<input type="checkbox" id="3" value="3" v-model="Q7">
+			<br>
+			<label for="4">Pour rendre visite à de la famille / des amis</label>
+			<input type="checkbox" id="4" value="4" v-model="Q7">
+			<br>
+			<label for="5">Pour accompagner mes enfants ou des proches (activités, rdv médicaux…)</label>
+			<input type="checkbox" id="5" value="5" v-model="Q7">
+			<br>
+			<label for="6">Autre</label>
+			<input type="checkbox" id="6" value="6" v-model="Q7">
+			<br>
+			<button v-if="Q7" @click="next" class="btn-next">Suivant</button>
+			<button @click="back" class="btn-return">retour</button>
+		</div>
+
+
+		<div id="q8" v-if="level === 9 && Q3 <= 2">
+			<h1> Dans quelle ville vous déplacez-vous principalement en voiture ? </h1>
+			<select v-model="Q8" class="form-control">
+				<option v-for="option in q8" :key="option.id" :value="option.output">
+					{{ option.text }}
+				</option>
+			</select>
+			<input v-if="Q8 === 7" class="form-control" type="text" v-model="Q8_DETAIL" placeholder="Precisions">
+			<button v-if="Q8" @click="next" class="btn-next">Suivant</button>
+			<button @click="back" class="btn-return">retour</button>
+		</div>
+
+		<div id="q9" v-if="level === 10 && Q3 <= 2 || level === 5 && Q3 === 3">
+			<h1> Votre ménage dispose-t-il d’une moto ou d’un scooter ? </h1>
+			<select v-model="Q9" class="form-control">
+				<option v-for="option in q9" :key="option.id" :value="option.output">
+					{{ option.text }}
+				</option>
+			</select>
+			<button v-if="Q9" @click="next" class="btn-next">Suivant</button>
+			<button @click="back" class="btn-return">retour</button>
+		</div>
+
+		<div id="q10" v-if="(level === 11 && Q3 <= 2 || level === 6 && Q3 === 3) && Q9 <= 2">
+			<h1> Où garez-vous votre moto / scooter en général dans le quartier ?</h1>
+			<select v-model="Q10" class="form-control">
+				<option v-for="option in q10" :key="option.id" :value="option.output">
+					{{ option.text }}
+				</option>
+			</select>
+			<button v-if="Q10" @click="next" class="btn-next">Suivant</button>
+			<button @click="back" class="btn-return">retour</button>
+		</div>
+
+		<div id="q11"
+			v-if="((level === 12 && Q3 <= 2 || level === 7 && Q3 === 3) && Q9 <= 2) || ((level === 11 && Q3 <= 2 || level === 6 && Q3 === 3) && Q9 === 3)">
+			<h1>Votre ménage dispose-t-il d’un vélo ou d’une trottinette ? (plusieurs réponses possibles)</h1>
+			<br>
+			<label for="1">Oui, un vélo</label>
+			<input type="checkbox" id="1" value="1" v-model="Q11">
+			<br>
+			<label for="2">Oui, deux vélos ou plus</label>
+			<input type="checkbox" id="2" value="2" v-model="Q11">
+			<br>
+			<label for="3">Oui, une trottinette ou plus</label>
+			<input type="checkbox" id="3" value="3" v-model="Q11">
+			<br>
+			<label for="4">Non, pas de vélo / trottinette</label>
+			<input type="checkbox" id="4" value="4" v-model="Q11">
+			<br>
+			<br>
+			<br>
+			<br>
+			<div v-if="Q11.includes('1') || Q11.includes('2') || Q11.includes('3')">
+				<h1>Ce vélo / trottinette est-il/elle utilisé(e) régulièrement ?</h1>
+				<select v-model="Q11bis" class="form-control">
+					<option v-for="option in q11bis" :key="option.id" :value="option.output">
+						{{ option.text }}
+					</option>
+				</select>
+				<br>
+				<br>
+				<br>
+				<br>
+				<h1>Pour quel(s) motif(s) utilisez-vous principalement ce vélo / trottinette ? (plusieurs réponses
+					possibles)</h1>
+				<br>
+				<label for="1">Pour aller au travail</label>
+				<input type="checkbox" id="1" value="1" v-model="Q12">
+				<br>
+				<label for="2">Pour aller faire des courses</label>
+				<input type="checkbox" id="2" value="2" v-model="Q12">
+				<br>
+				<label for="3">Pour un motif de loisirs (sport, etc.)</label>
+				<input type="checkbox" id="3" value="3" v-model="Q12">
+				<br>
+				<label for="4">Pour rendre visite à de la famille / des amis</label>
+				<input type="checkbox" id="4" value="4" v-model="Q12">
+				<br>
+				<label for="5">Pour accompagner mes enfants ou des proches (activités, rdv médicaux…)</label>
+				<input type="checkbox" id="5" value="5" v-model="Q12">
+				<br>
+				<label for="6">Autre</label>
+				<input type="checkbox" id="6" value="6" v-model="Q12">
+			</div>
+			<button v-if="Q11" @click="next" class="btn-next">Suivant</button>
+			<button @click="back" class="btn-return">retour</button>
+		</div>
+
+		<div
+			v-if="((level === 13 && Q3 <= 2 || level === 8 && Q3 === 3) && Q9 <= 2) || ((level === 12 && Q3 <= 2 || level === 7 && Q3 === 3) && Q9 === 3)">
 			<button @click="submitSurvey" class="btn-next">FINIR QUESTIONNAIRE</button>
 			<button @click="back" class="btn-return">retour</button>
 		</div>
@@ -26,7 +210,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { } from "./reponses";
+import { q1, q2, q3, q4, q5, q6, q8, q9, q10, q11, q11bis, q13, q14, q15, q16, q17, q18, q19 } from "./reponses";
 import GareSelector from "./GareSelector.vue";
 import CommuneSelector from './CommuneSelector.vue';
 import { db } from "../firebaseConfig";
@@ -38,6 +222,20 @@ const surveyCollectionRef = collection(db, "Londeau");
 const level = ref(0);
 const startDate = ref('');
 const ENQUETEUR = ref('');
+const Q1 = ref('');
+const Q2 = ref('');
+const Q3 = ref('');
+const Q4 = ref('');
+const Q5 = ref('');
+const Q6 = ref('');
+const Q7 = ref([]);
+const Q8 = ref('');
+const Q8_DETAIL = ref('');
+const Q9 = ref('');
+const Q10 = ref('');
+const Q11 = ref([]);
+const Q11bis = ref('');
+const Q12 = ref([]);
 
 
 
@@ -75,11 +273,38 @@ const submitSurvey = async () => {
 		JOUR: new Date().toLocaleDateString("fr-FR", { weekday: 'long' }),
 		ENQUETEUR: ENQUETEUR.value,
 		HEURE_FIN: new Date().toLocaleTimeString("fr-FR").slice(0, 8),
-
+		Q1: Q1.value,
+		Q2: Q2.value,
+		Q3: Q3.value,
+		Q4: Q4.value,
+		Q5: Q5.value,
+		Q6: Q6.value,
+		Q7: Q7.value,
+		Q8: Q8.value,
+		Q8_DETAIL: Q8_DETAIL.value,
+		Q9: Q9.value,
+		Q10: Q10.value,
+		Q11: Q11.value,
+		Q11bis: Q11bis.value,
+		Q12: Q12.value,
 	});
 	level.value = 1;
 	startDate.value = "";
 	getDocCount();
+	Q1.value = "";
+	Q2.value = "";
+	Q3.value = "";
+	Q4.value = "";
+	Q5.value = "";
+	Q6.value = "";
+	Q7.value = [];
+	Q8.value = "";
+	Q8_DETAIL.value = "";
+	Q9.value = "";
+	Q10.value = "";
+	Q11.value = [];
+	Q11bis.value = "";
+	Q12.value = [];
 };
 
 const downloadData = async () => {
@@ -96,6 +321,20 @@ const downloadData = async () => {
 			JOUR: "JOUR",
 			HEURE_DEBUT: "HEURE_DEBUT",
 			HEURE_FIN: "HEURE_FIN",
+			Q1: "Q1",
+			Q2: "Q2",
+			Q3: "Q3",
+			Q4: "Q4",
+			Q5: "Q5",
+			Q6: "Q6",
+			Q7: "Q7",
+			Q8: "Q8",
+			Q8_DETAIL: "Q8_DETAIL",
+			Q9: "Q9",
+			Q10: "Q10",
+			Q11: "Q11",
+			Q11bis: "Q11bis",
+			Q12: "Q12",
 		};
 
 		// Initialize maxWidths with header lengths
@@ -112,7 +351,58 @@ const downloadData = async () => {
 				JOUR: docData.JOUR || "",
 				HEURE_DEBUT: docData.HEURE_DEBUT || "",
 				HEURE_FIN: docData.HEURE_FIN || "",
+				Q1: docData.Q1 || "",
+				Q2: docData.Q2 || "",
+				Q3: docData.Q3 || "",
+				Q4: docData.Q4 || "",
+				Q5: docData.Q5 || "",
+				Q6: docData.Q6 || "",
+				Q7: docData.Q7 || "",
+				Q8: docData.Q8 || "",
+				Q8_DETAIL: docData.Q8_DETAIL || "",
+				Q9: docData.Q9 || "",
+				Q10: docData.Q10 || "",
+				Q11: docData.Q11 || "",
+				Q11bis: docData.Q11bis || "",
+				Q12: docData.Q12 || "",
 			};
+
+			if (docData.Q7) {
+				let Q7String = "";
+				for (const key in docData.Q7) {
+					const value = docData.Q7[key];
+					// You can customize the separator here (e.g., comma, semicolon)
+					Q7String += `${value}, `;
+				}
+				// Remove the trailing comma and space from the string
+				mappedData.Q7 = Q7String.slice(0, -2);
+			}
+
+
+			if (docData.Q11) {
+				let Q11String = "";
+				for (const key in docData.Q11) {
+					const value = docData.Q11[key];
+					// You can customize the separator here (e.g., comma, semicolon)
+					Q11String += `${value}, `;
+				}
+				// Remove the trailing comma and space from the string
+				mappedData.Q11 = Q11String.slice(0, -2);
+			}
+
+
+			if (docData.Q12) {
+				let Q12String = "";
+				for (const key in docData.Q12) {
+					const value = docData.Q12[key];
+					// You can customize the separator here (e.g., comma, semicolon)
+					Q12String += `${value}, `;
+				}
+				// Remove the trailing comma and space from the string
+				mappedData.Q12 = Q12String.slice(0, -2);
+			}
+
+
 			data.push(mappedData);
 			// Update maxWidths for each key in mappedData
 			Object.keys(mappedData).forEach((key) => {
