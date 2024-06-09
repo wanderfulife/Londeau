@@ -80,17 +80,10 @@ const q11bis = [
 	{ id: 4, output: 4, text: "Non, très rarement" },
 ];
 
-const q13 = [
+const q14 = [
 	{ id: 1, output: 1, text: "Oui, je suis le seul du ménage à en avoir un" },
 	{ id: 2, output: 2, text: "Oui, nous sommes plusieurs personnes du ménage à en avoir un" },
 	{ id: 3, output: 3, text: "Non" },
-];
-
-const q14 = [
-	{ id: 1, output: 1, text: "Oui, tous les jours" },
-	{ id: 2, output: 2, text: "Oui, plusieurs fois par semaine" },
-	{ id: 3, output: 3, text: "Non, rarement (seulement quelques fois par mois)" },
-	{ id: 4, output: 4, text: "Non, très rarement" },
 ];
 
 const q15 = [
@@ -108,6 +101,13 @@ const q16 = [
 ];
 
 const q17 = [
+	{ id: 1, output: 1, text: "Oui, tous les jours" },
+	{ id: 2, output: 2, text: "Oui, plusieurs fois par semaine" },
+	{ id: 3, output: 3, text: "Non, rarement (seulement quelques fois par mois)" },
+	{ id: 4, output: 4, text: "Non, très rarement" },
+];
+
+const q18 = [
 	{ id: 1, output: 1, text: "Noisy-le-Sec (RER)" },
 	{ id: 2, output: 2, text: "Bondy (RER)" },
 	{ id: 3, output: 3, text: "Rosny Bois Perrier (RER)" },
@@ -116,7 +116,7 @@ const q17 = [
 	{ id: 6, output: 6, text: "Autre (à renseigner)" },
 ];
 
-const q18 = [
+const q19 = [
 	{ id: 1, output: 1, text: "A pied" },
 	{ id: 2, output: 2, text: "En vélo ou trottinette" },
 	{ id: 3, output: 3, text: "En bus" },
@@ -126,11 +126,11 @@ const q18 = [
 	{ id: 7, output: 7, text: "Autre" },
 ];
 
-const q19 = [
+const q20 = [
 	{ id: 1, output: 1, text: "Oui, certainement" },
 	{ id: 2, output: 2, text: "Peut-être, on verra" },
 	{ id: 3, output: 3, text: "Non" },
 	{ id: 4, output: 4, text: "Je ne suis pas au courant de l’ouverture de cette nouvelle station" },
 ];
 
-export { q1, q2, q3, q4, q5, q6, q8, q9, q10, q11, q11bis, q13, q14, q15, q16, q17, q18, q19};
+export { q1, q2, q3, q4, q5, q6, q8, q9, q10, q11, q11bis, q14, q15, q16, q17, q18, q19, q20};
