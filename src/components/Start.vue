@@ -218,6 +218,9 @@
 			<br>
 			<label for="6">Une station de réparation en accès libre</label>
 			<input type="checkbox" id="6" value="6" v-model="Q13">
+			<br>
+			<label for="7">rien</label>
+			<input type="checkbox" id="7" value="7" v-model="Q13">
 			<button v-if="Q13.length > 0" @click="next" class="btn-next">Suivant</button>
 			<button @click="back" class="btn-return">retour</button>
 		</div>
@@ -298,6 +301,7 @@
 			<button v-if="Q19" @click="next" class="btn-next">Suivant</button>
 			<button @click="back" class="btn-return">retour</button>
 		</div>
+
 		<div id="q20"
 			v-if="((level === 20 && Q3 <= 2 || level === 15 && Q3 === 3) && Q9 <= 2) || ((level === 19 && Q3 <= 2 || level === 14 && Q3 === 3) && Q9 === 3) ||
 				((((level === 18 && Q3 <= 2 || level === 13 && Q3 === 3) && Q9 <= 2) || ((level === 17 && Q3 <= 2 || level === 12 && Q3 === 3) && Q9 === 3)) && Q17 === 4)">
@@ -309,17 +313,30 @@
 			</select>
 			<button v-if="Q20" @click="next" class="btn-next">Suivant</button>
 			<button @click="back" class="btn-return">retour</button>
-	</div>
+		</div>
 
-	<div id="end"
-		v-if="((level === 21 && Q3 <= 2 || level === 16 && Q3 === 3) && Q9 <= 2) || ((level === 20 && Q3 <= 2 || level === 15 && Q3 === 3) && Q9 === 3) ||
-	((((level === 19 && Q3 <= 2 || level === 14 && Q3 === 3) && Q9 <= 2) || ((level === 18 && Q3 <= 2 || level === 13 && Q3 === 3) && Q9 === 3)) && Q17 === 4)">
-		<button @click="submitSurvey" class="btn-next">FINIR QUESTIONNAIRE</button>
-		<button @click="back" class="btn-return">retour</button>
-	</div>
-	<img class="logo" src="../assets/Alycelogo.webp" alt="Logo Alyce">
+		<div id="q21"
+			v-if="((level === 21 && Q3 <= 2 || level === 16 && Q3 === 3) && Q9 <= 2) || ((level === 20 && Q3 <= 2 || level === 15 && Q3 === 3) && Q9 === 3) ||
+				((((level === 19 && Q3 <= 2 || level === 14 && Q3 === 3) && Q9 <= 2) || ((level === 18 && Q3 <= 2 || level === 13 && Q3 === 3) && Q9 === 3)) && Q17 === 4)">
+			<h1>Numéro du bâtiment ?</h1>
+			<select v-model="Q21" class="form-control">
+				<option v-for="option in q21" :key="option.id" :value="option.output">
+					{{ option.text }}
+				</option>
+			</select>
+			<button v-if="Q21" @click="next" class="btn-next">Suivant</button>
+			<button @click="back" class="btn-return">retour</button>
+		</div>
 
-	<button class="btn-fin" @click="downloadData">download DATA</button>
+		<div id="end"
+			v-if="((level === 22 && Q3 <= 2 || level === 17 && Q3 === 3) && Q9 <= 2) || ((level === 21 && Q3 <= 2 || level === 16 && Q3 === 3) && Q9 === 3) ||
+				((((level === 20 && Q3 <= 2 || level === 15 && Q3 === 3) && Q9 <= 2) || ((level === 19 && Q3 <= 2 || level === 14 && Q3 === 3) && Q9 === 3)) && Q17 === 4)">
+			<button @click="submitSurvey" class="btn-next">FINIR QUESTIONNAIRE</button>
+			<button @click="back" class="btn-return">retour</button>
+		</div>
+		<img class="logo" src="../assets/Alycelogo.webp" alt="Logo Alyce">
+
+		<button class="btn-fin" @click="downloadData">download DATA</button>
 
 	</div>
 	<div>
@@ -329,7 +346,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { q1, q2, q3, q4, q5, q6, q8, q9, q10, q11, q11bis, q14, q15, q16, q17, q18, q19, q20 } from "./reponses";
+import { q1, q2, q3, q4, q5, q6, q8, q9, q10, q11, q11bis, q14, q15, q16, q17, q18, q19, q20, q21 } from "./reponses";
 import GareSelector from "./GareSelector.vue";
 import CommuneSelector from './CommuneSelector.vue';
 import { db } from "../firebaseConfig";
@@ -364,6 +381,7 @@ const Q18 = ref('');
 const Q18_DETAIL = ref('');
 const Q19 = ref('');
 const Q20 = ref('');
+const Q21 = ref('');
 
 
 
@@ -426,6 +444,7 @@ const submitSurvey = async () => {
 		Q18_DETAIL: Q18_DETAIL.value,
 		Q19: Q19.value,
 		Q20: Q20.value,
+		Q21: Q21.value,
 	});
 	level.value = 1;
 	startDate.value = "";
@@ -453,6 +472,7 @@ const submitSurvey = async () => {
 	Q18_DETAIL.value = "";
 	Q19.value = "";
 	Q20.value = "";
+	Q21.value = "";
 };
 
 const downloadData = async () => {
@@ -492,6 +512,7 @@ const downloadData = async () => {
 			Q18_DETAIL: "Q18_DETAIL",
 			Q19: "Q19",
 			Q20: "Q20",
+			Q21: "Q21",
 		};
 
 		// Initialize maxWidths with header lengths
@@ -531,6 +552,7 @@ const downloadData = async () => {
 				Q18_DETAIL: docData.Q18_DETAIL || "",
 				Q19: docData.Q19 || "",
 				Q20: docData.Q20 || "",
+				Q21: docData.Q21 || "",
 			};
 
 			if (docData.Q7) {

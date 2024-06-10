@@ -133,4 +133,16 @@ const q20 = [
 	{ id: 4, output: 4, text: "Je ne suis pas au courant de l’ouverture de cette nouvelle station" },
 ];
 
-export { q1, q2, q3, q4, q5, q6, q8, q9, q10, q11, q11bis, q14, q15, q16, q17, q18, q19, q20};
+const q21 = [
+	{ id: 1, output: 1, text: "A" },
+	{ id: 2, output: 2, text: "B" },
+	{ id: 3, output: 3, text: "C" },
+	{ id: 4, output: 4, text: "D" },
+	{ id: 5, output: 5, text: "E" },
+	{ id: 6, output: 6, text: "F" },
+	{ id: 7, output: 7, text: "G" },
+	{ id: 8, output: 8, text: "H" },
+	{ id: 9, output: 9, text: "I" },
+];
+
+export { q1, q2, q3, q4, q5, q6, q8, q9, q10, q11, q11bis, q14, q15, q16, q17, q18, q19, q20, q21};
