@@ -303,7 +303,7 @@
 		</div>
 
 		<div id="q20"
-			v-if="((level === 20 && Q3 <= 2 || level === 15 && Q3 === 3) && Q9 <= 2) || ((level === 19 && Q3 <= 2 || level === 14 && Q3 === 3) && Q9 === 3) ||
+			v-if="(((level === 20 && Q3 <= 2 || level === 15 && Q3 === 3) && Q9 <= 2) || ((level === 19 && Q3 <= 2 || level === 14 && Q3 === 3) && Q9 === 3) && Q17 <= 3) ||
 				((((level === 18 && Q3 <= 2 || level === 13 && Q3 === 3) && Q9 <= 2) || ((level === 17 && Q3 <= 2 || level === 12 && Q3 === 3) && Q9 === 3)) && Q17 === 4)">
 			<h1> Pensez-vous utiliser la nouvelle station de la ligne métro 11 « Coteaux Beauclair » ? </h1>
 			<select v-model="Q20" class="form-control">
@@ -316,7 +316,7 @@
 		</div>
 
 		<div id="q21"
-			v-if="((level === 21 && Q3 <= 2 || level === 16 && Q3 === 3) && Q9 <= 2) || ((level === 20 && Q3 <= 2 || level === 15 && Q3 === 3) && Q9 === 3) ||
+			v-if="(((level === 21 && Q3 <= 2 || level === 16 && Q3 === 3) && Q9 <= 2) || ((level === 20 && Q3 <= 2 || level === 15 && Q3 === 3) && Q9 === 3) && Q17 <= 3) ||
 				((((level === 19 && Q3 <= 2 || level === 14 && Q3 === 3) && Q9 <= 2) || ((level === 18 && Q3 <= 2 || level === 13 && Q3 === 3) && Q9 === 3)) && Q17 === 4)">
 			<h1>Numéro du bâtiment ?</h1>
 			<select v-model="Q21" class="form-control">
@@ -329,8 +329,8 @@
 		</div>
 
 		<div id="end"
-			v-if="((level === 22 && Q3 <= 2 || level === 17 && Q3 === 3) && Q9 <= 2) || ((level === 21 && Q3 <= 2 || level === 16 && Q3 === 3) && Q9 === 3) ||
-				((((level === 20 && Q3 <= 2 || level === 15 && Q3 === 3) && Q9 <= 2) || ((level === 19 && Q3 <= 2 || level === 14 && Q3 === 3) && Q9 === 3)) && Q17 === 4)">
+			v-if="(((level === 22 && Q3 <= 2 || level === 17 && Q3 === 3) && Q9 <= 2) || ((level === 21 && Q3 <= 2 || level === 16 && Q3 === 3) && Q9 === 3) && Q17 <= 3 )||
+				(((level === 20 && Q3 <= 2 || level === 15 && Q3 === 3) && Q9 <= 2) || ((level === 19 && Q3 <= 2 || level === 14 && Q3 === 3) && Q9 === 3) && Q17 === 4)">
 			<button @click="submitSurvey" class="btn-next">FINIR QUESTIONNAIRE</button>
 			<button @click="back" class="btn-return">retour</button>
 		</div>
